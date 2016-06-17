@@ -1,0 +1,25 @@
+version: '2'
+services:
+  db1:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+    command: mysqld --log-bin --server-id=1
+  db2:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+    command: mysqld --log-bin --server-id=2
+  db3:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+    command: mysqld --log-bin --server-id=3
+  mxs:
+    image: tanji/maxscale:1.4.3
+    volumes:
+      - ~/Dev/docker/etc/maxscale.cnf:/etc/maxscale.cnf
+    ports:
+      - "4006:4006"
+      - "4008:4008"
+      - "6603:6603"
