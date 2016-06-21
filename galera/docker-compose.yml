@@ -7,7 +7,7 @@ services:
       - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_INITDB_SKIP_TZINFO=1
     volumes:
-      - ~/Dev/docker/compose/galera/conf.d:/etc/mysql/conf.d
+      - conf.d:/etc/mysql/conf.d
     command: mysqld --wsrep_new_cluster
   node2:
     image: mariadb:10.1
@@ -18,8 +18,8 @@ services:
       - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_INITDB_SKIP_TZINFO=1
     volumes:
-      - ~/Dev/docker/compose/galera/conf.d:/etc/mysql/conf.d
-      - ~/Dev/docker/compose/galera/entrypoint.d:/docker-entrypoint-initdb.d
+      - conf.d:/etc/mysql/conf.d
+      - entrypoint.d:/docker-entrypoint-initdb.d
     entrypoint: mysqld --wsrep_cluster_address=gcomm://node1 --user=mysql
   node3:
     image: mariadb:10.1
@@ -30,8 +30,8 @@ services:
       - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_INITDB_SKIP_TZINFO=1
     volumes:
-      - ~/Dev/docker/compose/galera/conf.d:/etc/mysql/conf.d
-      - ~/Dev/docker/compose/galera/entrypoint.d:/docker-entrypoint-initdb.d
+      - conf.d:/etc/mysql/conf.d
+      - entrypoint.d:/docker-entrypoint-initdb.d
     entrypoint: mysqld --wsrep_cluster_address=gcomm://node1 --user=mysql
   mxs:
     image: tanji/maxscale:latest
@@ -40,7 +40,7 @@ services:
       - node2
       - node3
     volumes:
-      - ~/Dev/docker/etc/maxscale_galera.cnf:/etc/maxscale.cnf
+      - maxscale_galera.cnf:/etc/maxscale.cnf
     ports:
       - "4006:4006"
       - "4008:4008"
