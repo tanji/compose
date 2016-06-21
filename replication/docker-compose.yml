@@ -18,8 +18,13 @@ services:
   mxs:
     image: tanji/maxscale:1.4.3
     volumes:
-      - ~/Dev/docker/etc/maxscale.cnf:/etc/maxscale.cnf
+      - ./maxscale.cnf:/etc/maxscale.cnf
     ports:
       - "4006:4006"
       - "4008:4008"
       - "6603:6603"
+  mrm:
+    image: tanji/replication-manager:latest
+    command: replication-manager monitor --daemon --verbose --http-server --interactive=false
+    volumes:
+      - ./config.toml:/etc/replication-manager/config.toml
