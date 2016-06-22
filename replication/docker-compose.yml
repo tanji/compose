@@ -21,7 +21,6 @@ services:
       - ./maxscale.cnf:/etc/maxscale.cnf
     ports:
       - "4006:4006"
-      - "4008:4008"
       - "6603:6603"
   mrm:
     image: tanji/replication-manager:latest

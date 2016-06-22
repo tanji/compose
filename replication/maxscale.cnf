@@ -18,19 +18,10 @@ detect_stale_master=true
 [RW Split Router]
 type=service
 router=readwritesplit
-servers=server1,server2,server3
+servers=db1,db2,db3
 user=root
 passwd=admin
 max_slave_connections=100%
-enable_root_user=1
-
-[Read Connection Router]
-type=service
-router=readconnroute
-router_options=master
-servers=server1
-user=root
-passwd=admin
 enable_root_user=1
 
 [Debug Interface]
@@ -40,12 +31,6 @@ router=debugcli
 [CLI]
 type=service
 router=cli
-
-[Read Connection Listener]
-type=listener
-service=Read Connection Router
-protocol=MySQLClient
-port=4008
 
 [RW Split Listener]
 type=listener
@@ -77,9 +62,8 @@ address=db2
 port=3306
 protocol=MySQLBackend
 
-[3]
+[db3]
 type=server
 address=db3
 port=3306
 protocol=MySQLBackend
-
