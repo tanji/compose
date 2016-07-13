@@ -4,17 +4,17 @@ services:
     image: mariadb:latest
     environment:
       - MYSQL_ROOT_PASSWORD=admin
-    command: mysqld --log-bin --server-id=1
+    command: mysqld --log-bin --general-log --server-id=1 --gtid-strict-mode=1
   db2:
     image: mariadb:latest
     environment:
       - MYSQL_ROOT_PASSWORD=admin
-    command: mysqld --log-bin --server-id=2
+    command: mysqld --log-bin --general-log --server-id=2 --gtid-strict-mode=1
   db3:
     image: mariadb:latest
     environment:
       - MYSQL_ROOT_PASSWORD=admin
-    command: mysqld --log-bin --server-id=3
+    command: mysqld --log-bin --general-log --server-id=3 --gtid-strict-mode=1
   mxs:
     image: tanji/maxscale:1.4.3
     volumes:
